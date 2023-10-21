@@ -11,7 +11,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: 'http://51.20.187.2:3000',
+        origin: 'http://13.48.24.253:3000',
         methods: ['GET', 'POST', "PATCH"],
     },
 });
@@ -24,10 +24,9 @@ function leaveRoom(userID, chatRoomUsers) {
 }
 io.on('connection', (socket) => {
     console.log(`User connected ${socket.id}`);
-
-
     socket.on('join_room', (data) => {
         const { username, room } = data;
+        console.log(data);
         socket.join(room);
 
         let __createdtime__ = Date.now();
@@ -68,7 +67,7 @@ io.on('connection', (socket) => {
     socket.on('send_message', (data) => {
         const { message, username, room, __createdtime__ } = data;
         io.in(room).emit('receive_messages', data);
-
+        console.log(data);
     });
 
     socket.on('disconnect', () => {
