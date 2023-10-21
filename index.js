@@ -11,7 +11,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ['http://localhost:3000', 'http://51.20.187.2:3000/'],
+        origin: 'http://51.20.187.2:3000',
         methods: ['GET', 'POST', "PATCH"],
     },
 });
